@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class testcontroler extends Controller
 {
- function hoha(){
+ /*function hoha(){
         echo "Hello";
  }
     
@@ -22,6 +22,6 @@ class testcontroler extends Controller
  	$data = ['Arslan','Zaid','Taha','Imad'];
  	//return view('about')->with('data', $data);
  	return view('about',compact('data'));
- }
+ }*/
 
 }

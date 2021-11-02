@@ -15,9 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-    $posts = DB::select('SELECT * FROM `posts`');
-     return view('Posts.index', compact('posts'));
-        //
+        $posts = DB::table('posts')->get();
+        return view('Posts.index',compact('posts'));
     }
 
     /**
@@ -27,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -38,7 +37,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post;
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+        return redirect('posts');
     }
 
     /**
@@ -60,7 +63,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $data = $post->id;
+        $posts = DB::table('posts')->where('id','=',$data)->get();
+        return view('posts.edit',compact('posts'));
     }
 
     /**

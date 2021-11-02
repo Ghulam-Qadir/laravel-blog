@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\testcontroler;
 use App\Http\Controllers\PostController;
 
 /*
@@ -15,7 +14,7 @@ use App\Http\Controllers\PostController;
 |
 */
 
-/*Route::get('/', function(){
+Route::get('/', function(){
 	return view('Home');
 });
 Route::get('about', function(){
@@ -23,10 +22,8 @@ Route::get('about', function(){
 });
 Route::get('contact', function(){
 	return view('contact');
-});*/
+});
 
-//Route::get('new',"testcontroler@hoha");
-Route::get('new',[testcontroler::class, 'hoha']);
-Route::get('/',[testcontroler::class, 'index']);
-Route::get('about',[testcontroler::class, 'show']);
+/*Route::get('/',[testcontroler::class, 'index']);
+Route::get('about',[testcontroler::class, 'show']);*/
 Route::resource('posts', PostController::class);
