@@ -8,7 +8,7 @@
 	<h1>{{session('status')}}</h1>
 @endif
 <br>
-	<form action="{{ url('posts') }}" method="POST">
+	<form action="{{ url('store') }}" method="POST">
 		<div class="form-group">
 		@csrf
 		<input type="text" name="title" placeholder="title" class="form-control">

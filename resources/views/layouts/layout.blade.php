@@ -30,7 +30,7 @@
       	<a href="{{ url('posts') }}" class="nav-link">Post View</a>
       </li>
       <li class="nav-item">
-      	<a href="{{ url('posts/create') }}" class="nav-link">Add Post</a>
+      	<a href="{{ url('create') }}" class="nav-link">Add Post</a>
       </li>
     </ul>
   </div>
@@ -40,7 +40,7 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="{{ asset('asset/js/jquery-3.5.1.slim.min.js') }}"></script>
-<script src=" {{ asset('asset/js/popper.min.js') }} dist/umd/"></script>
+<script src=" {{ asset('asset/js/popper.min.js') }}"></script>
 <script src=" {{ asset('asset/js/bootstrap.min.js') }}"></script>
 </body>
 </html>

@@ -15,8 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = DB::table('posts')->get();
-        return view('Posts.index',compact('posts'));
+
     }
 
     /**
@@ -41,6 +40,7 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->save();
+        $post->session()->flash('msg','Data Inserted !');
         return redirect('posts');
     }
 
@@ -52,7 +52,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        //$posts = DB::table('posts')->get();
+        $posts = Post::get();
+        return view('Posts.index',compact('posts'));
     }
 
     /**
@@ -61,11 +63,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $post,$id)
     {
-        $data = $post->id;
-        $posts = DB::table('posts')->where('id','=',$data)->get();
-        return view('posts.edit',compact('posts'));
+     return view('Posts.edit')->with('PostArr',Post::find($id));
+
     }
 
     /**
@@ -77,7 +78,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+  
+        $post = Post::find($request->id);
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+        return redirect('posts');
     }
 
     /**
@@ -86,8 +92,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post,$id)
     {
-        //
+        Post::destroy(array('id',$id));
+        return redirect('posts');
     }
 }

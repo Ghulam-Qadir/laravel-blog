@@ -18,8 +18,8 @@
 				<tr>
 					<td>{{ $post->id }}</td>
 					<td>{{ $post->title }}</td>
-					<td><a class="btn btn-primary" href=" posts/{{ $post->id }}/edit">Edit</a></td>
-					<td><a class="btn btn-danger" href="/delete/{{ $post->id }}">Delete</a></td>
+					<td><a class="btn btn-primary" href="edit/{{ $post->id }}">Edit</a></td>
+					<td><a class="btn btn-danger" href="delete/{{ $post->id }}">Delete</a></td>
 				</tr>
 				@endforeach
 			</tbody>
