@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,16 @@ Route::get('contact', function(){
 	return view('contact');
 });
 
+Route::get('login', function(){
+	return view('login');
+});
+Route::post('loginUser', [UserAuth::class,'loginUser']);
 /*Route::get('/',[testcontroler::class, 'index']);
 Route::get('about',[testcontroler::class, 'show']);*/
 //Route::resource('posts', PostController::class);
 Route::get('create', [PostController::class,'create']);
 Route::post('store', [PostController::class,'store']);
-Route::put('update/{id}', [PostController::class,'update'])->name('Post.update');
 Route::get('posts', [PostController::class,'show']);
-Route::get('delete/{id}', [PostController::class,'destroy']);
 Route::get('edit/{id}', [PostController::class,'edit']);
+Route::get('delete/{id}', [PostController::class,'destroy']);
+Route::put('update/{id}', [PostController::class,'update'])->name('Post.update');

@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>@yield('title')</title>
-<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href=" {{ asset('asset/css/bootstrap.min.css') }}">
-</head>
-<body>
 <header>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,18 +21,7 @@
       <li class="nav-item">
       	<a href="{{ url('create') }}" class="nav-link">Add Post</a>
       </li>
-        <li class="nav-item">
-        <a href="{{ url('logout') }}" class="nav-link">Log Out</a>
-      </li>
     </ul>
   </div>
 </nav>
 </header>
-@yield('content')
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="{{ asset('asset/js/jquery-3.5.1.slim.min.js') }}"></script>
-<script src=" {{ asset('asset/js/popper.min.js') }}"></script>
-<script src=" {{ asset('asset/js/bootstrap.min.js') }}"></script>
-</body>
-</html>
