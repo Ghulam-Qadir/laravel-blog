@@ -28,13 +28,22 @@ Route::get('contact', function(){
 Route::get('login', function(){
 	return view('login');
 });
+Route::get('logout', function(){
+	session()->forget('BLOG_USER_ID');
+	return redirect('login');
+});
 Route::post('loginUser', [UserAuth::class,'loginUser']);
 /*Route::get('/',[testcontroler::class, 'index']);
 Route::get('about',[testcontroler::class, 'show']);*/
 //Route::resource('posts', PostController::class);
+
+
+Route::group(['middleware'=>['adminAuth']],function(){
 Route::get('create', [PostController::class,'create']);
 Route::post('store', [PostController::class,'store']);
 Route::get('posts', [PostController::class,'show']);
 Route::get('edit/{id}', [PostController::class,'edit']);
 Route::get('delete/{id}', [PostController::class,'destroy']);
 Route::put('update/{id}', [PostController::class,'update'])->name('Post.update');
+
+});
