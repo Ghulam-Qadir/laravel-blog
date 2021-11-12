@@ -16,7 +16,7 @@ class UserAuth extends Controller
    			if (isset($result[0]->id)) {
    				if ($result[0]->status == 1) {
    				$request->session()->put('BLOG_USER_ID',$result[0]->id);
-   				return redirect('posts');
+   				//return redirect('posts');
    				}else{
    				$request->session()->flash('msg','Account Deactivated');
    				return redirect('login');

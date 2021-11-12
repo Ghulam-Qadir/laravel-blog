@@ -2,7 +2,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href=" {{ asset('asset/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href=" {{ asset('storage/asset/css/bootstrap.min.css') }}">
 	<title>Document</title>
 </head>
 <body>
@@ -25,15 +25,10 @@
 						<label for="exampleInputPassword1">Password</label>
 						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
 					</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary mt-2">Submit</button>
 				</form>
 			</div>
 		</div>
 	</div>	
 	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="{{ asset('asset/js/jquery-3.5.1.slim.min.js') }}"></script>
-	<script src=" {{ asset('asset/js/popper.min.js') }}"></script>
-	<script src=" {{ asset('asset/js/bootstrap.min.js') }}"></script>
-</body>
-</html>
+@include('layouts.footer')
