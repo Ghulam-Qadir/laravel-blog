@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+
+      /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +50,7 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->save();
-        $post->session()->flash('msg','Data Inserted !');
+        $request->session()->flash('msg','Data Inserted !');
         return redirect('posts');
     }
 

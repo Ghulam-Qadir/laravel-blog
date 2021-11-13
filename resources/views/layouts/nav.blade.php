@@ -20,10 +20,7 @@
         <a class="nav-link" href="{{ url('contact') }}">Contact</a>
       </li>
       <li class="nav-item">
-        <a href="{{ url('posts') }}" class="nav-link">Post View</a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ url('create') }}" class="nav-link">Add Post</a>
+        <a href="{{ url('posts') }}" class="nav-link">Dashboard</a>
       </li>
                     </ul>
 

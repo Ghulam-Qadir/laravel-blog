@@ -3,8 +3,12 @@
 @section('content')
 <div class="container">
 	<div id="row">
+		<div class="col-md-6 m-3">
+					<a href="{{ url('create') }}" class="btn btn-primary">Add Post</a>
+				</div>
 		<div class="col-md-12">
 		<table class="table">
+
 			<thead>
 				<tr>
 					<th>Id</th>
