@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -50,7 +51,7 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->save();
-        $request->session()->flash('msg','Data Inserted !');
+        Session::flash('success','Data Inserted !');
         return redirect('posts');
     }
 
@@ -93,6 +94,7 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->save();
+        Session::flash('warning','Data Update !');
         return redirect('posts');
     }
 
@@ -105,6 +107,7 @@ class PostController extends Controller
     public function destroy(Post $post,$id)
     {
         Post::destroy(array('id',$id));
+        Session::flash('danger','Data Deleted !');
         return redirect('posts');
     }
 }
