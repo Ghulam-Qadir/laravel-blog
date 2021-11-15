@@ -36,6 +36,7 @@
 					<tr>
 						<td>{{ $post->id }}</td>
 						<td>{{ $post->title }}</td>
+						<td><img src="{{ asset('upload/post/'.$post->post_image)}}" alt="" width="100"></td>
 						<td><a class="btn btn-primary" href="edit/{{ $post->id }}">Edit</a></td>
 						<td><a class="btn btn-danger" href="delete/{{ $post->id }}">Delete</a></td>
 					</tr>
