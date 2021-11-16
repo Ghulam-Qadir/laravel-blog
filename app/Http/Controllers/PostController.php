@@ -29,7 +29,7 @@ class PostController extends Controller
      */
     public function index(Post $post,$slug)
     {
-
+     $exampleSlug = Str::slug($slug);
      return view('Posts.single')->with('Postdata',Post::where('title',$slug)->first());
     }
 
