@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\file;
+use Illuminate\Support\Str;
 
 
 class PostController extends Controller
@@ -26,9 +27,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Post $post,$slug)
     {
 
+     return view('Posts.single')->with('Postdata',Post::where('title',$slug)->first());
     }
 
     /**

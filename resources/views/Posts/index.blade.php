@@ -27,6 +27,7 @@
 					<tr>
 						<th>Id</th>
 						<th>Title</th>
+						<th>Post Image</th>
 						<th>Edit</th>
 						<th>Delete</th>
 					</tr>
@@ -35,7 +36,7 @@
 					@foreach ($posts as $post)
 					<tr>
 						<td>{{ $post->id }}</td>
-						<td>{{ $post->title }}</td>
+						<td><a href="single/{{ $post->title }}">{{ $post->title }}</a></td>
 						<td><img src="{{ asset('upload/post/'.$post->post_image)}}" alt="" width="100"></td>
 						<td><a class="btn btn-primary" href="edit/{{ $post->id }}">Edit</a></td>
 						<td><a class="btn btn-danger" href="delete/{{ $post->id }}">Delete</a></td>
