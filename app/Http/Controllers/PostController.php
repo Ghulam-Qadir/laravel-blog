@@ -6,6 +6,9 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\file;
+use Illuminate\Support\Str;
+
 
 class PostController extends Controller
 {
@@ -24,9 +27,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Post $post,$slug)
     {
-
+     $exampleSlug = Str::slug($slug);
+     return view('Posts.single')->with('Postdata',Post::where('title',$slug)->first());
     }
 
     /**
@@ -50,6 +54,13 @@ class PostController extends Controller
         $post = new Post;
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        if ($request->hasfile('post_image')) {
+            $file = $request->file('post_image');
+            $extintion = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extintion;
+            $file->move('upload/post/',$filename);
+            $post->post_image = $filename;
+        } 
         $post->save();
         Session::flash('success','Data Inserted !');
         return redirect('posts');
@@ -93,7 +104,18 @@ class PostController extends Controller
         $post = Post::find($request->id);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-        $post->save();
+           if ($request->hasfile('post_image')) {
+            $destination = 'upload/post/'.$post->post_image;
+            if (File::exists($destination)) {
+                file::delete($destination);
+            }
+            $file = $request->file('post_image');
+            $extintion = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extintion;
+            $file->move('upload/post/',$filename);
+            $post->post_image = $filename;
+        } 
+        $post->update();
         Session::flash('warning','Data Update !');
         return redirect('posts');
     }

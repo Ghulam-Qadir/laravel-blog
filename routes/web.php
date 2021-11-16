@@ -24,6 +24,7 @@ Route::get('about', function(){
 Route::get('contact', function(){
 	return view('contact');
 });
+Route::get('single/{slug}', [PostController::class,'index'])->name('single.post');
 
 /*Route::get('login', function(){
 	return view('login');
