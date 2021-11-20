@@ -15,7 +15,8 @@ use App\Http\Controllers\UserAuth;
 |
 */
 
-Route::get('/', [PostController::class,'all']);
+Route::get('/', [PostController::class,'all'])->name('home');
+
 Route::get('about', function(){
 	return view('about');
 });
@@ -23,7 +24,6 @@ Route::get('contact', function(){
 	return view('contact');
 });
 Route::get('single/{slug}', [PostController::class,'index'])->name('single.post');
-
 /*Route::get('login', function(){
 	return view('login');
 });
@@ -35,6 +35,7 @@ Route::get('logout', function(){
 /*Route::get('/',[testcontroler::class, 'index']);
 Route::get('about',[testcontroler::class, 'show']);*/
 //Route::resource('posts', PostController::class);
+
 
 
 Route::group(['middleware'=>['auth']],function(){
