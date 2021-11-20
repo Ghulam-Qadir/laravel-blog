@@ -15,9 +15,7 @@ use App\Http\Controllers\UserAuth;
 |
 */
 
-Route::get('/', function(){
-	return view('Home');
-});
+Route::get('/', [PostController::class,'all']);
 Route::get('about', function(){
 	return view('about');
 });

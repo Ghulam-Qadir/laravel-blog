@@ -18,10 +18,10 @@ class PostController extends Controller
      *
      * @return void
      */
-    public function __construct()
+/*    public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
     /**
      * Display a listing of the resource.
      *
@@ -29,8 +29,7 @@ class PostController extends Controller
      */
     public function index(Post $post,$slug)
     {
-     $exampleSlug = Str::slug($slug);
-     return view('Posts.single')->with('Postdata',Post::where('title',$slug)->first());
+     return view('Posts.single')->with('postdata',Post::where('slug',$slug)->first());
     }
 
     /**
@@ -53,6 +52,8 @@ class PostController extends Controller
     {
         $post = new Post;
         $post->title = $request->input('title');
+        $slug = $request->input('title');
+        $post->slug = Str::slug($slug);
         $post->body = $request->input('body');
         if ($request->hasfile('post_image')) {
             $file = $request->file('post_image');
@@ -77,6 +78,20 @@ class PostController extends Controller
         //$posts = DB::table('posts')->get();
         $posts = Post::get();
         return view('Posts.index',compact('posts'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function all(Post $post)
+    {
+    
+    	//$posts = DB::table('posts')->get();
+        $posts = Post::get();
+        return view('home',compact('posts'));
+        
     }
 
     /**
