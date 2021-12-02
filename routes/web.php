@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserAuth;
+use App\Http\Controllers\QuerycrudController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,7 @@ Route::get('contact', function(){
 	return view('contact');
 });
 Route::get('single/{slug}', [PostController::class,'index'])->name('single.post');
+Route::get('querysingle/{slug}', [QuerycrudController::class,'index'])->name('querysingle.post');
 /*Route::get('login', function(){
 	return view('login');
 });
@@ -39,11 +42,23 @@ Route::get('about',[testcontroler::class, 'show']);*/
 
 
 Route::group(['middleware'=>['auth']],function(){
+
+
+
 Route::get('create', [PostController::class,'create']);
 Route::post('store', [PostController::class,'store']);
 Route::get('posts', [PostController::class,'show']);
 Route::get('edit/{id}', [PostController::class,'edit']);
 Route::get('delete/{id}', [PostController::class,'destroy']);
 Route::put('update/{id}', [PostController::class,'update'])->name('Post.update');
+
+
+Route::get('querycreate', [QuerycrudController::class,'create']);
+Route::post('querystore', [QuerycrudController::class,'store']);
+Route::get('queryposts', [QuerycrudController::class,'show']);
+Route::get('queryedit/{id}', [QuerycrudController::class,'edit']);
+Route::get('querydelete/{id}', [QuerycrudController::class,'destroy']);
+Route::put('queryupdate/{id}', [QuerycrudController::class,'update'])->name('queryupdate.update');
+
 });
 Auth::routes();

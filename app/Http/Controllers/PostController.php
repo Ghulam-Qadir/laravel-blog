@@ -96,18 +96,6 @@ class PostController extends Controller
         
     }
 
-        /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function all(Post $post)
-    {
-        //$posts = DB::table('posts')->get();
-        $posts = Post::get();
-        return view('Home',compact('posts'));   
-    }
 
     /**
      * Show the form for editing the specified resource.

@@ -20,7 +20,10 @@
         <a class="nav-link" href="{{ url('contact') }}">Contact</a>
       </li>
       <li class="nav-item">
-        <a href="{{ url('posts') }}" class="nav-link">Dashboard</a>
+        <a href="{{ url('posts') }}" class="nav-link">Dashboard With Model</a>
+      </li> 
+      <li class="nav-item">
+        <a href="{{ url('queryposts') }}" class="nav-link">Dashboard With Query</a>
       </li>
                     </ul>
 
