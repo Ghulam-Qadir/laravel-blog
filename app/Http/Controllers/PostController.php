@@ -29,7 +29,8 @@ class PostController extends Controller
      */
     public function index(Post $post,$slug)
     {
-     return view('Posts.single')->with('Postdata',Post::where('slug',$slug)->first());
+
+     return view('Posts.single')->with('postdata',Post::where('slug',$slug)->first());
     }
 
     /**
@@ -52,7 +53,8 @@ class PostController extends Controller
     {
         $post = new Post;
         $post->title = $request->input('title');
-        $post_slug = str::slug($request->input('title'));
+        $slug = $request->input('title');
+        $post->slug = Str::slug($slug);
         $post->slug = $post_slug;
         $post->body = $request->input('body');
         if ($request->hasfile('post_image')) {
@@ -79,8 +81,7 @@ class PostController extends Controller
         $posts = Post::get();
         return view('Posts.index',compact('posts'));
     }
-
-        /**
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Post  $post
@@ -88,10 +89,13 @@ class PostController extends Controller
      */
     public function all(Post $post)
     {
-        //$posts = DB::table('posts')->get();
+    
+    	//$posts = DB::table('posts')->get();
         $posts = Post::get();
-        return view('Home',compact('posts'));   
+        return view('home',compact('posts'));
+        
     }
+
 
     /**
      * Show the form for editing the specified resource.
