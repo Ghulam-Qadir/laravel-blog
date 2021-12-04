@@ -129,4 +129,12 @@ class QuerycrudController extends Controller
         return redirect('queryposts');
         //
     }
+
+        public function all(querycrud $querycrud)
+    {
+    
+        $querycruds = DB::table('querycruds')->get();
+        return view('querycrud',compact('querycruds'));
+        
+    }
 }

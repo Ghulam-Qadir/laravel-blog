@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserAuth;
 use App\Http\Controllers\QuerycrudController;
+use App\Http\Controllers\UserAuth;
+
 
 
 /*
@@ -17,7 +18,8 @@ use App\Http\Controllers\QuerycrudController;
 |
 */
 
-Route::get('/', [PostController::class,'all'])->name('home');
+Route::get('/', [PostController::class,'all']);
+Route::get('query', [QuerycrudController::class,'all']);
 
 Route::get('about', function(){
 	return view('about');
@@ -25,8 +27,8 @@ Route::get('about', function(){
 Route::get('contact', function(){
 	return view('contact');
 });
-Route::get('single/{slug}', [PostController::class,'index'])->name('single.post');
-Route::get('querysingle/{slug}', [QuerycrudController::class,'index'])->name('querysingle.post');
+Route::get('single/{slug}', [PostController::class,'index']);
+Route::get('querysingle/{slug}', [QuerycrudController::class,'index']);
 /*Route::get('login', function(){
 	return view('login');
 });
