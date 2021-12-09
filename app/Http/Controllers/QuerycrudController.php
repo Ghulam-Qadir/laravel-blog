@@ -99,6 +99,10 @@ class QuerycrudController extends Controller
       $slug = Str::slug($title);
         $body = $request->input('body');
         if ($request->hasfile('post_image')) {
+            $destination = 'upload/post/'.$post->post_image;
+            if (File::exists($destination)) {
+                file::delete($destination);
+            }
             $file = $request->file('post_image');
             $extintion = $file->getClientOriginalExtension();
             $filename = time().'.'.$extintion;
