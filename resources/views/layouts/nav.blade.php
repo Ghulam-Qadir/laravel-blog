@@ -24,16 +24,17 @@
       </li> 
       <li class="nav-item">
         <a href="{{ url('queryposts') }}" class="nav-link">Dashboard With Query</a>
-      </li>  
+      </li>
+           <li class="nav-item">
+        <a href="{{ url('ajaxposts') }}" class="nav-link">Dashboard With Ajax</a>
+      </li>
       <li class="nav-item">
         <a href="{{ url('model-crud') }}" class="nav-link">model-crud</a>
       </li>  
       <li class="nav-item">
         <a href="{{ url('query-builder-crud') }}" class="nav-link">query-builder-crud</a>
       </li>
-      <li class="nav-item">
-        <a href="{{ url('ajax') }}" class="nav-link">Ajax</a>
-      </li>
+ 
                     </ul>
 
                     <!-- Right Side Of Navbar -->
