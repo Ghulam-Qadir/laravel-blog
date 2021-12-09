@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserAuth;
 use App\Http\Controllers\QuerycrudController;
+use App\Http\Controllers\UserAuth;
+
 
 
 /*
@@ -17,33 +18,27 @@ use App\Http\Controllers\QuerycrudController;
 |
 */
 
-Route::get('/', [PostController::class,'all'])->name('home');
-
+Route::get('/', function(){
+	return view('blog');
+});
 Route::get('about', function(){
 	return view('about');
 });
 Route::get('contact', function(){
 	return view('contact');
 });
-Route::get('single/{slug}', [PostController::class,'index'])->name('single.post');
-Route::get('querysingle/{slug}', [QuerycrudController::class,'index'])->name('querysingle.post');
-/*Route::get('login', function(){
-	return view('login');
-});
-Route::get('logout', function(){
-	session()->forget('BLOG_USER_ID');
-	return redirect('login');
-});*/
-/*Route::post('loginUser', [UserAuth::class,'loginUser']);*/
-/*Route::get('/',[testcontroler::class, 'index']);
-Route::get('about',[testcontroler::class, 'show']);*/
-//Route::resource('posts', PostController::class);
+
+
+Route::get('model-crud', [PostController::class,'all']);
+Route::get('query-builder-crud', [QuerycrudController::class,'all']);
+
+
+Route::get('single/{slug}', [PostController::class,'index']);
+Route::get('querysingle/{slug}', [QuerycrudController::class,'index']);
 
 
 
 Route::group(['middleware'=>['auth']],function(){
-
-
 
 Route::get('create', [PostController::class,'create']);
 Route::post('store', [PostController::class,'store']);
@@ -52,13 +47,12 @@ Route::get('edit/{id}', [PostController::class,'edit']);
 Route::get('delete/{id}', [PostController::class,'destroy']);
 Route::put('update/{id}', [PostController::class,'update'])->name('Post.update');
 
-
 Route::get('querycreate', [QuerycrudController::class,'create']);
 Route::post('querystore', [QuerycrudController::class,'store']);
 Route::get('queryposts', [QuerycrudController::class,'show']);
 Route::get('queryedit/{id}', [QuerycrudController::class,'edit']);
 Route::get('querydelete/{id}', [QuerycrudController::class,'destroy']);
 Route::put('queryupdate/{id}', [QuerycrudController::class,'update'])->name('queryupdate.update');
-
 });
 Auth::routes();
+

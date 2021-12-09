@@ -7,6 +7,7 @@
 	<title>@yield('title')</title>
 <!-- Bootstrap CSS -->
 	  <link rel="stylesheet" href={{ asset('css/app.css') }}>
+	  <link rel="stylesheet" href={{ asset('storage/yamankaseta/test.css') }}>
 </head>
 <body>
 <header>
