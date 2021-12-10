@@ -53,6 +53,9 @@ Route::get('queryposts', [QuerycrudController::class,'show']);
 Route::get('queryedit/{id}', [QuerycrudController::class,'edit']);
 Route::get('querydelete/{id}', [QuerycrudController::class,'destroy']);
 Route::put('queryupdate/{id}', [QuerycrudController::class,'update'])->name('queryupdate.update');
+
+Route::get('ajaxcreate', [AjaxcrudController::class,'create'])->name('ajaxcreate');
 });
+
 Auth::routes();
 
