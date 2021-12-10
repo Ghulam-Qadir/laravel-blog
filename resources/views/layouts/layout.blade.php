@@ -7,4 +7,5 @@
 	</div>
 </div>
 <!-- Optional JavaScript -->
+@yield('scripts');
 @include('layouts.footer')

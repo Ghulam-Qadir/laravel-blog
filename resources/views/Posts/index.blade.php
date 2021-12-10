@@ -2,6 +2,11 @@
 @section('title', 'All Post View')
 @section('content')
 <div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Crud With Model Method</h1>
+		</div>
+	</div>
 	<div id="row">
 		<div class="col-md-6 m-3">
 			<a href="{{ url('create') }}" class="btn btn-primary">Add Post</a>

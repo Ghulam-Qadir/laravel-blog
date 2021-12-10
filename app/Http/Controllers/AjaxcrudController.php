@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ajaxcrud;
+use App\Models\Ajaxcrud;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\file;
+use Illuminate\Support\Str;
 
 class AjaxcrudController extends Controller
 {
@@ -14,7 +18,7 @@ class AjaxcrudController extends Controller
      */
     public function index()
     {
-        //
+        return view('Ajax.index');
     }
 
     /**
@@ -24,7 +28,7 @@ class AjaxcrudController extends Controller
      */
     public function create()
     {
-        //
+        return view('Ajax.create');
     }
 
     /**
@@ -35,7 +39,22 @@ class AjaxcrudController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ajaxcrud = new Ajaxcrud;
+        $ajaxcrud->title = $request->input('title');
+        $slug = $request->input('title');
+        $ajaxcrud_slug = Str::slug($slug);
+        $ajaxcrud->slug = $ajaxcrud_slug;
+        $ajaxcrud->body = $request->input('body');
+        if ($request->hasfile('post_image')) {
+            $file = $request->file('post_image');
+            $extintion = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extintion;
+            $file->move('upload/ajaxposts/',$filename);
+            $post->post_image = $filename;
+        } 
+        $ajaxcrud->save();
+        Session::flash('success','Data Inserted !');
+        return redirect('ajaxposts');
     }
 
     /**
@@ -46,7 +65,8 @@ class AjaxcrudController extends Controller
      */
     public function show(ajaxcrud $ajaxcrud)
     {
-        //
+        $ajaxcrud = Ajaxcrud::get();
+        return view('Ajax.index',compact('ajaxcrud'));
     }
 
     /**

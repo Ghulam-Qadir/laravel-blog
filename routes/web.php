@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AjaxcrudController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuerycrudController;
 use App\Http\Controllers\UserAuth;
-
+use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -55,7 +55,8 @@ Route::get('querydelete/{id}', [QuerycrudController::class,'destroy']);
 Route::put('queryupdate/{id}', [QuerycrudController::class,'update'])->name('queryupdate.update');
 
 Route::get('ajaxcreate', [AjaxcrudController::class,'create'])->name('ajaxcreate');
+Route::get('ajaxposts', [AjaxcrudController::class,'show'])->name('ajaxposts');
+Route::get('ajaxstore', [AjaxcrudController::class,'store'])->name('ajaxstore');
 });
 
 Auth::routes();
-
