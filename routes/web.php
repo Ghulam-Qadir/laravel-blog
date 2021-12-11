@@ -56,7 +56,7 @@ Route::put('queryupdate/{id}', [QuerycrudController::class,'update'])->name('que
 
 Route::get('ajaxcreate', [AjaxcrudController::class,'create'])->name('ajaxcreate');
 Route::get('ajaxposts', [AjaxcrudController::class,'show'])->name('ajaxposts');
-Route::get('ajaxstore', [AjaxcrudController::class,'store'])->name('ajaxstore');
+Route::post('ajaxstore', [AjaxcrudController::class,'store'])->name('ajaxstore');
 });
 
 Auth::routes();

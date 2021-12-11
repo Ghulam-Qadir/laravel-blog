@@ -5,12 +5,12 @@ $(document).ready(function() {
 		}
 	});
 
+// ajax data insert start
 	$("#ajaxalldata").submit(function(e) {
 		e.preventDefault();
 		var action = $(this).attr('action');
 		var method = $(this).attr('method');
 		var form = new FormData(this);
-		//console.log(data);
 		$.ajax({
 			url: action,
 			type: method,
@@ -19,8 +19,19 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
 			success: function (response) {
-				console.log(response);
+				if (response.status == 400) {
+				$('#save_errorlist').html("");
+				$('#save_errorlist').removeClass('d-none');
+					$.each(response.errors, function(key, err_val) {
+						 $('#save_errorlist').append('<li>'+err_val+'</li>');
+					});
+				}else if(response.status == 200){
+					$('#datainserted').append('<div class="alert alert-success"'+response.success+'</div>')
+						
+				}
 			}
 		});
 	});
+// insert data end
+
 });

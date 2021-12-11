@@ -1,14 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Ajaxcrud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\file;
 use Illuminate\Support\Str;
-
 class AjaxcrudController extends Controller
 {
     /**
@@ -20,7 +18,6 @@ class AjaxcrudController extends Controller
     {
         return view('Ajax.index');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -30,7 +27,6 @@ class AjaxcrudController extends Controller
     {
         return view('Ajax.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -39,6 +35,17 @@ class AjaxcrudController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'title' =>' required|max:191',
+            'body' =>' required|min:3|max:1000',
+            'post_image' => 'mimes:jpeg,jpg,png,gif|required|max:10000', // max 10000kb
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors()
+            ]);
+        }else{
         $ajaxcrud = new Ajaxcrud;
         $ajaxcrud->title = $request->input('title');
         $slug = $request->input('title');
@@ -50,13 +57,15 @@ class AjaxcrudController extends Controller
             $extintion = $file->getClientOriginalExtension();
             $filename = time().'.'.$extintion;
             $file->move('upload/ajaxposts/',$filename);
-            $post->post_image = $filename;
+            $ajaxcrud->post_image = $filename;
         } 
         $ajaxcrud->save();
-        Session::flash('success','Data Inserted !');
-        return redirect('ajaxposts');
+            return response()->json([
+                'status' => 200,
+                'success' => 'Ajax Data inserted successfuly !'
+            ]);
+        }
     }
-
     /**
      * Display the specified resource.
      *
@@ -68,7 +77,6 @@ class AjaxcrudController extends Controller
         $ajaxcrud = Ajaxcrud::get();
         return view('Ajax.index',compact('ajaxcrud'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -79,7 +87,6 @@ class AjaxcrudController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -91,7 +98,6 @@ class AjaxcrudController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
