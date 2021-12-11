@@ -55,7 +55,8 @@ Route::get('querydelete/{id}', [QuerycrudController::class,'destroy']);
 Route::put('queryupdate/{id}', [QuerycrudController::class,'update'])->name('queryupdate.update');
 
 Route::get('ajaxcreate', [AjaxcrudController::class,'create'])->name('ajaxcreate');
-Route::get('ajaxposts', [AjaxcrudController::class,'show'])->name('ajaxposts');
+Route::get('ajaxposts', [AjaxcrudController::class,'index'])->name('ajaxposts');
+Route::get('ajaxposts', [AjaxcrudController::class,'loaddata'])->name('loaddata');
 Route::post('ajaxstore', [AjaxcrudController::class,'store'])->name('ajaxstore');
 });
 

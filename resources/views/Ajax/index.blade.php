@@ -19,21 +19,6 @@
 			<table class="table">
 				<div id="datainserted">
 				</div>
-				@if(Session::has('success'))
-				<div class="alert alert-success">
-					{{Session::get('success')}}
-				</div>
-				@endif
-				@if(Session::has('warning'))
-				<div class="alert alert-info">
-					{{Session::get('warning')}}
-				</div>
-				@endif
-					@if(Session::has('danger'))
-				<div class="alert alert-danger">
-					{{Session::get('danger')}}
-				</div>
-				@endif
 				<thead>
 					<tr>
 						<th>Id</th>
@@ -44,15 +29,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($ajaxcrud as $ajax)
 					<tr>
-						<td>{{ $ajax->id }}</td>
-						<td><a href="single/{{ $ajax->slug }}">{{ $ajax->title }}</a></td>
-						<td><img src="{{ asset('/upload/ajaxposts/'.$ajax->post_image)}}" alt="" width="100"></td>
-						<td><a class="btn btn-primary" href="edit/{{ $ajax->id }}">Edit</a></td>
-						<td><a class="btn btn-danger" href="delete/{{ $ajax->id }}">Delete</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a class="btn btn-primary" href="">Edit</a></td>
+						<td><a class="btn btn-danger" href="">Delete</a></td>
 					</tr>
-					@endforeach
 				</tbody>
 			</table>
 		</div>

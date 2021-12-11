@@ -57,7 +57,7 @@ class AjaxcrudController extends Controller
             $extintion = $file->getClientOriginalExtension();
             $filename = time().'.'.$extintion;
             $file->move('upload/ajaxposts/',$filename);
-            $ajaxcrud->post_image = $filename;
+            $post->post_image = $filename;
         } 
         $ajaxcrud->save();
             return response()->json([
@@ -72,10 +72,14 @@ class AjaxcrudController extends Controller
      * @param  \App\Models\ajaxcrud  $ajaxcrud
      * @return \Illuminate\Http\Response
      */
-    public function show(ajaxcrud $ajaxcrud)
+  /*  public function show(ajaxcrud $ajaxcrud)
     {
-        $ajaxcrud = Ajaxcrud::get();
+        $ajaxcrud = Ajaxcrud::all();
         return view('Ajax.index',compact('ajaxcrud'));
+    }*/
+
+    public function loaddata(){
+    $ajaxcrud = Ajaxcrud::all();
     }
     /**
      * Show the form for editing the specified resource.

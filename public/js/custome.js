@@ -4,6 +4,17 @@ $(document).ready(function() {
 			'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
 		}
 	});
+loaddata();
+	function loaddata() {
+		$.ajax({
+			url: 'ajaxposts',
+			type: 'GET',
+			dataType: 'json'
+			success; function (response) {
+				console.log(response.success);
+			}
+		})
+	}
 
 // ajax data insert start
 	$("#ajaxalldata").submit(function(e) {
