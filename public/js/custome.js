@@ -20,14 +20,14 @@ $(document).ready(function() {
 						<td>${val_ajex.title}</td>
 						<td><img src="${val_ajex.post_image}" width="100"></td>
 						<td><a class="btn btn-primary" href="">Edit</a></td>
-						<td><a class="btn btn-danger" href="">Delete</a></td>
+						<td><button type="button" class="btn btn-danger deletebutton" value="${val_ajex.id}">Delete</a></td>
 						</tr>
 						`)
 				});
 			}
 		})
 	}
-// ajax data insert start
+	// ajax data insert start
 $("#ajaxalldata").submit(function(e) {
 	e.preventDefault();
 	var action = $(this).attr('action');
@@ -57,4 +57,42 @@ $("#ajaxalldata").submit(function(e) {
 	});
 });
 // insert data end
+
+$(document).on('click', '.deletebutton', function(e) {
+	   if(!confirm("Do you really want to do this?")) {
+       return false;
+     }
+	e.preventDefault();
+	var delid = $(this).val();
+	var e = this;
+	var url = "/ajaxdel/"+ delid
+	
+	$.ajax({
+	url: url,
+	type: 'POST',
+	dataType: 'json',
+	data:{'id':delid}
+})
+.done(function(response) {
+ if(response.status == 200){
+      // Remove row from HTML Table
+      $(e).closest('tr').css('background','#f44336');
+      $(e).closest('tr').fadeOut(1000,function(){
+        $(this).remove();
+        $('#datainserted').append(`<div class="alert alert-danger">${response.massage}</div>`)
+      });
+    }
+})
+.fail(function() {
+	console.log("error");
+})
+.always(function() {
+	console.log("complete");
+});
+ });
+
+
+
+
+
 });

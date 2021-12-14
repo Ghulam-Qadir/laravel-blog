@@ -113,8 +113,27 @@ class AjaxcrudController extends Controller
      * @param  \App\Models\ajaxcrud  $ajaxcrud
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ajaxcrud $ajaxcrud)
+    public function destroy(Request $request,$id)
     {
-        //
+    	// Ajaxcrud::destroy(array('id',$id));
+     try {
+     	$ajaxcrud = Ajaxcrud::find($id);
+     	Ajaxcrud::destroy($ajaxcrud);
+     	   $destination = $ajaxcrud->post_image;
+            if (File::exists($destination)) {
+                file::delete($destination);
+            }
+     	return response()->json([
+     	'status' => 200,
+     	'massage' => 'Data Deleted'
+     	]);
+     } catch (Exception $e) {
+
+    	return response()->json([
+     	'status' => 400,
+     	'massage' => $e->getMessage()
+     	]);
+     	
+     }
     }
 }
