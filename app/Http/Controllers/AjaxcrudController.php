@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Ajaxcrud;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -16,6 +17,7 @@ class AjaxcrudController extends Controller
      */
     public function index()
     {
+    	$ajaxcrud = new Ajaxcrud;
         return view('Ajax.index');
     }
     /**
@@ -56,8 +58,8 @@ class AjaxcrudController extends Controller
             $file = $request->file('post_image');
             $extintion = $file->getClientOriginalExtension();
             $filename = time().'.'.$extintion;
-            $file->move('upload/ajaxposts/',$filename);
-            $post->post_image = $filename;
+            $image_path = $file->move('upload/ajaxposts/',$filename);
+            $ajaxcrud->post_image = $image_path;
         } 
         $ajaxcrud->save();
             return response()->json([
@@ -72,14 +74,17 @@ class AjaxcrudController extends Controller
      * @param  \App\Models\ajaxcrud  $ajaxcrud
      * @return \Illuminate\Http\Response
      */
-  /*  public function show(ajaxcrud $ajaxcrud)
+    public function show(ajaxcrud $ajaxcrud)
     {
         $ajaxcrud = Ajaxcrud::all();
         return view('Ajax.index',compact('ajaxcrud'));
-    }*/
+    }
 
     public function loaddata(){
     $ajaxcrud = Ajaxcrud::all();
+     return response()->json([
+     	'ajaxcrud' => $ajaxcrud
+     ]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -108,8 +113,27 @@ class AjaxcrudController extends Controller
      * @param  \App\Models\ajaxcrud  $ajaxcrud
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ajaxcrud $ajaxcrud)
+    public function destroy(Request $request,$id)
     {
-        //
+    	// Ajaxcrud::destroy(array('id',$id));
+     try {
+     	$ajaxcrud = Ajaxcrud::find($id);
+     	Ajaxcrud::destroy($ajaxcrud);
+     	   $destination = $ajaxcrud->post_image;
+            if (File::exists($destination)) {
+                file::delete($destination);
+            }
+     	return response()->json([
+     	'status' => 200,
+     	'massage' => 'Data Deleted'
+     	]);
+     } catch (Exception $e) {
+
+    	return response()->json([
+     	'status' => 400,
+     	'massage' => $e->getMessage()
+     	]);
+     	
+     }
     }
 }

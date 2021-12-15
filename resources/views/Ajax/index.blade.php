@@ -17,8 +17,7 @@
 		</div>
 		<div class="col-md-12">
 			<table class="table">
-				<div id="datainserted">
-				</div>
+				<div id="datainserted"></div>
 				<thead>
 					<tr>
 						<th>Id</th>
@@ -28,15 +27,7 @@
 						<th>Delete</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td><a class="btn btn-primary" href="">Edit</a></td>
-						<td><a class="btn btn-danger" href="">Delete</a></td>
-					</tr>
-				</tbody>
+				<tbody id="ajaxalldatatable"></tbody>
 			</table>
 		</div>
 	</div>
