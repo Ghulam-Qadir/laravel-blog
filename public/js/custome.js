@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var alldata = [];
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -11,6 +12,7 @@ $(document).ready(function() {
 			type: 'GET',
 			dataType: 'json',
 			success: function (response) {
+				alldata = response.ajaxcrud;
 				// console.log(response.ajaxcrud)
 				$.each(response.ajaxcrud, function(key, val_ajex) {
 					/* iterate through array or object */
@@ -19,8 +21,8 @@ $(document).ready(function() {
 						<td>${val_ajex.id}</td>
 						<td>${val_ajex.title}</td>
 						<td><img src="${val_ajex.post_image}" width="100"></td>
-						<td><a class="btn btn-primary" href="">Edit</a></td>
-						<td><button type="button" class="btn btn-danger deletebutton" value="${val_ajex.id}">Delete</a></td>
+						<td><button type="button" class="btn btn-primary editbtn" value="${val_ajex.id}">Edit</button></td>
+						<td><button type="button" class="btn btn-danger deletebutton" value="${val_ajex.id}">Delete</button></td>
 						</tr>
 						`)
 				});
@@ -92,7 +94,13 @@ $(document).on('click', '.deletebutton', function(e) {
  });
 
 
-
+$(document).on('click', '.editbtn', function(e) {
+	e.preventDefault();
+	/* Act on the event */
+	var id1 = $(this).val();
+	var item = alldata.find(item => item.id == id1);
+	console.log(item);
+});
 
 
 });
