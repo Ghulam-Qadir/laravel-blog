@@ -33,7 +33,7 @@
 	</div>
 </div>
 @endsection
-@section('scripts');
+@section('scripts')
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -62,7 +62,41 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary ajaxdatasubmit">Save changes</button>
+        <button type="submit" class="btn btn-primary ajaxdatasubmit">Save</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+  	<form id="ajaxallupdate" action="{{ url('ajaxupdate') }}" method="POST" enctype="multipart/form-data">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<ul class="alert alert-info d-none" id="save_errorlist"></ul>
+		<div class="form-group">
+		<input type="hidden" name="updateid" class="updateid">
+		<input type="text" name="title" placeholder="title" class="form-control title">
+	</div>
+	<div class="form-group">
+		<textarea name="body"  cols="30" rows="10" class="form-control body"></textarea>
+	</div>
+	<div class="form-group">
+		<input type="file" name="post_image" class="form-control">
+		<img type="image" class="post-image" src="" width="100">
+	</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary ajaxdataupdate">Update changes</button>
       </div>
     </div>
     </form>

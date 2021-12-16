@@ -87,7 +87,9 @@ class AjaxcrudController extends Controller
     public function loaddata()
     {
         $ajaxcrud = Ajaxcrud::all();
-        return response()->json([ 'ajaxcrud' => $ajaxcrud ]);
+        return response()->json([ 
+            'data' => $ajaxcrud 
+        ]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -108,12 +110,41 @@ class AjaxcrudController extends Controller
      */
     public function update(Request $request, ajaxcrud $ajaxcrud)
     {
-        $id = $request->id;
-        $ajaxcrud = Ajaxcrud::find($id)->get();
-        return response()->json([
-        'status' => 200,
-        'massage' => $ajaxcrud
+    
+    $validator = Validator::make($request->all(),[
+            'title' =>' required|max:191',
+            'body' =>' required|min:3|max:1000',
+            'post_image' => 'mimes:jpeg,jpg,png,gif|required|max:10000', // max 10000kb
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors()
+            ]);
+        }else{
+
+        $ajaxcrud = Ajaxcrud::find($request->input('updateid'));
+        $ajaxcrud->title = $request->input('title');
+        $slug = $request->input('title');
+        $ajaxcrud_slug = Str::slug($slug);
+        $ajaxcrud->slug = $ajaxcrud_slug;
+        $ajaxcrud->body = $request->input('body');
+        if($request->post_image != null) {
+        if ($request->hasfile('post_image')) {
+            $file = $request->file('post_image');
+            $extintion = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extintion;
+            $image_path = $file->move('upload/ajaxposts/',$filename);
+            $ajaxcrud->post_image = $image_path;
+        } 
+        }
+        $ajaxcrud->update();
+            return response()->json([
+                'status' => 200,
+                'success' => 'Ajax Data Update successfuly !'
+            ]);
+        }
     }
     /**
      * Remove the specified resource from storage.
