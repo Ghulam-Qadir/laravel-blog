@@ -48,7 +48,7 @@ class QuerycrudController extends Controller
             $file = $request->file('post_image');
             $extintion = $file->getClientOriginalExtension();
             $filename = time().'.'.$extintion;
-            $file->move('upload/post/',$filename);
+            $file->move('upload/query/',$filename);
             $post_image = $filename;
         }
         $post = DB::table('querycruds')->insert([
@@ -99,14 +99,14 @@ class QuerycrudController extends Controller
       $slug = Str::slug($title);
         $body = $request->input('body');
         if ($request->hasfile('post_image')) {
-            $destination = 'upload/post/'.$post->post_image;
+            $destination = 'upload/query/'.$querycrud->post_image;
             if (File::exists($destination)) {
                 file::delete($destination);
             }
             $file = $request->file('post_image');
             $extintion = $file->getClientOriginalExtension();
             $filename = time().'.'.$extintion;
-            $file->move('upload/post/',$filename);
+            $file->move('upload/query/',$filename);
             $post_image = $filename;
         }
         DB::table('querycruds')->where('id',$id)->update([

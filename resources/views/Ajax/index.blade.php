@@ -68,6 +68,7 @@
     </form>
   </div>
 </div>
+
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
   	<form id="ajaxallupdate" action="{{ url('ajaxupdate') }}" method="POST" enctype="multipart/form-data">

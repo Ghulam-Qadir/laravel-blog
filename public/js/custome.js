@@ -60,7 +60,7 @@ $(document).ready(function() {
 
 // insert data end
 
-	$("#ajaxdataupdate").submit(function(e) {
+	$("#ajaxallupdate").submit(function(e) {
 		e.preventDefault();
 		var action = $(this).attr('action');
 		var method = $(this).attr('method');
@@ -80,7 +80,7 @@ $(document).ready(function() {
 						$('#save_errorlist').append('<li>'+err_val+'</li>');
 					});
 				}else if(response.status == 200){
-					$('#ajaxallupdate').modal('hide');
+					$('#editModal').modal('hide');
 					$('#ajaxalldatatable').html("");
 					loaddata();
 					$('#datainserted').append(`<div class="alert alert-success">${response.success}</div>`)

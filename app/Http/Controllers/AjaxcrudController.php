@@ -59,8 +59,9 @@ class AjaxcrudController extends Controller
         if($request->post_image != null) {
         if ($request->hasfile('post_image')) {
             $file = $request->file('post_image');
-            $extintion = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extintion;
+            //$extintion = $file->getClientOriginalExtension();
+            $fileorginalname = $file->getClientOriginalName();
+            $filename = time().'-'.$fileorginalname;
             $image_path = $file->move('upload/ajaxposts/',$filename);
             $ajaxcrud->post_image = $image_path;
         } 
@@ -108,10 +109,10 @@ class AjaxcrudController extends Controller
      * @param  \App\Models\ajaxcrud  $ajaxcrud
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ajaxcrud $ajaxcrud)
+    public function update(Request $request, Ajaxcrud $ajaxcrud)
     {
     
-    $validator = Validator::make($request->all(),[
+/*    $validator = Validator::make($request->all(),[
             'title' =>' required|max:191',
             'body' =>' required|min:3|max:1000',
             'post_image' => 'mimes:jpeg,jpg,png,gif|required|max:10000', // max 10000kb
@@ -122,7 +123,7 @@ class AjaxcrudController extends Controller
                 'status' => 400,
                 'errors' => $validator->errors()
             ]);
-        }else{
+        }else{*/
 
         $ajaxcrud = Ajaxcrud::find($request->input('updateid'));
         $ajaxcrud->title = $request->input('title');
@@ -132,6 +133,10 @@ class AjaxcrudController extends Controller
         $ajaxcrud->body = $request->input('body');
         if($request->post_image != null) {
         if ($request->hasfile('post_image')) {
+             $destination = $request->post_image;
+            if (File::exists($destination)) {
+                file::delete($destination);
+            }
             $file = $request->file('post_image');
             $extintion = $file->getClientOriginalExtension();
             $filename = time().'.'.$extintion;
@@ -144,7 +149,7 @@ class AjaxcrudController extends Controller
                 'status' => 200,
                 'success' => 'Ajax Data Update successfuly !'
             ]);
-        }
+      /*  }*/
     }
     /**
      * Remove the specified resource from storage.
