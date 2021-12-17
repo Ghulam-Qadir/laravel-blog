@@ -83,6 +83,7 @@ class AjaxcrudController extends Controller
     public function loaddata(){
     $ajaxcrud = Ajaxcrud::all();
      return response()->json([
+     	'status' => 200,
      	'ajaxcrud' => $ajaxcrud
      ]);
     }
