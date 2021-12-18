@@ -6,5 +6,5 @@
 		</div>
 	</div>
 </div>
-@yield('scripts');
+@yield('scripts')
 @include('layouts.footer')

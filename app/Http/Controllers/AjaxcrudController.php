@@ -59,9 +59,9 @@ class AjaxcrudController extends Controller
         if($request->post_image != null) {
         if ($request->hasfile('post_image')) {
             $file = $request->file('post_image');
-            //$extintion = $file->getClientOriginalExtension();
-            $fileorginalname = $file->getClientOriginalName();
-            $filename = time().'-'.$fileorginalname;
+            $extintion = $file->getClientOriginalExtension();
+            //$fileorginalname = $file->getClientOriginalName();
+            $filename = time().'-'.$extintion;
             $image_path = $file->move('upload/ajaxposts/',$filename);
             $ajaxcrud->post_image = $image_path;
         } 
@@ -133,9 +133,9 @@ class AjaxcrudController extends Controller
         $ajaxcrud->body = $request->input('body');
         if($request->post_image != null) {
         if ($request->hasfile('post_image')) {
-             $destination = $request->post_image;
+             $destination = $ajaxcrud->post_image;
             if (File::exists($destination)) {
-                file::delete($destination);
+                File::delete($destination);
             }
             $file = $request->file('post_image');
             $extintion = $file->getClientOriginalExtension();
@@ -161,7 +161,12 @@ class AjaxcrudController extends Controller
     {
     	// Ajaxcrud::destroy(array('id',$id));
      try {
-     	  $ajaxcrud = Ajaxcrud::find($id)->delete();
+     	  $ajaxcrud = Ajaxcrud::find($id);
+     	  $destination = 'upload/ajaxposts/'.$ajaxcrud->post_image;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $ajaxcrud->delete();
      	return response()->json([
      	'status' => 200,
      	'massage' => 'Data Deleted'

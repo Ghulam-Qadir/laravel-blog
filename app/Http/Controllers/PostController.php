@@ -127,7 +127,7 @@ class PostController extends Controller
            if ($request->hasfile('post_image')) {
             $destination = 'upload/post/'.$post->post_image;
             if (File::exists($destination)) {
-                file::delete($destination);
+                File::delete($destination);
             }
             $file = $request->file('post_image');
             $extintion = $file->getClientOriginalExtension();
@@ -148,7 +148,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post,$id)
     {
-        Post::destroy(array('id',$id));
+       $postdelet = Post::find($id);
+         $destination = 'upload/post/'.$postdelet->post_image;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $postdelet->delete();
         Session::flash('danger','Data Deleted !');
         return redirect('posts');
     }
