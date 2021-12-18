@@ -42,25 +42,30 @@ class AjaxcrudController extends Controller
             'body' =>' required|min:3|max:1000',
             'post_image' => 'mimes:jpeg,jpg,png,gif|required|max:10000', // max 10000kb
         ]);
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
                 'errors' => $validator->errors()
             ]);
         }else{
+
         $ajaxcrud = new Ajaxcrud;
         $ajaxcrud->title = $request->input('title');
         $slug = $request->input('title');
         $ajaxcrud_slug = Str::slug($slug);
         $ajaxcrud->slug = $ajaxcrud_slug;
         $ajaxcrud->body = $request->input('body');
+        if($request->post_image != null) {
         if ($request->hasfile('post_image')) {
             $file = $request->file('post_image');
             $extintion = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extintion;
+            //$fileorginalname = $file->getClientOriginalName();
+            $filename = time().'-'.$extintion;
             $image_path = $file->move('upload/ajaxposts/',$filename);
             $ajaxcrud->post_image = $image_path;
         } 
+        }
         $ajaxcrud->save();
             return response()->json([
                 'status' => 200,
@@ -80,12 +85,12 @@ class AjaxcrudController extends Controller
         return view('Ajax.index',compact('ajaxcrud'));
     }
 
-    public function loaddata(){
-    $ajaxcrud = Ajaxcrud::all();
-     return response()->json([
-     	'status' => 200,
-     	'ajaxcrud' => $ajaxcrud
-     ]);
+    public function loaddata()
+    {
+        $ajaxcrud = Ajaxcrud::all();
+        return response()->json([ 
+            'data' => $ajaxcrud 
+        ]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -95,7 +100,7 @@ class AjaxcrudController extends Controller
      */
     public function edit(ajaxcrud $ajaxcrud)
     {
-        //
+        
     }
     /**
      * Update the specified resource in storage.
@@ -104,9 +109,47 @@ class AjaxcrudController extends Controller
      * @param  \App\Models\ajaxcrud  $ajaxcrud
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ajaxcrud $ajaxcrud)
+    public function update(Request $request, Ajaxcrud $ajaxcrud)
     {
-        //
+    
+/*    $validator = Validator::make($request->all(),[
+            'title' =>' required|max:191',
+            'body' =>' required|min:3|max:1000',
+            'post_image' => 'mimes:jpeg,jpg,png,gif|required|max:10000', // max 10000kb
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors()
+            ]);
+        }else{*/
+
+        $ajaxcrud = Ajaxcrud::find($request->input('updateid'));
+        $ajaxcrud->title = $request->input('title');
+        $slug = $request->input('title');
+        $ajaxcrud_slug = Str::slug($slug);
+        $ajaxcrud->slug = $ajaxcrud_slug;
+        $ajaxcrud->body = $request->input('body');
+        if($request->post_image != null) {
+        if ($request->hasfile('post_image')) {
+             $destination = $ajaxcrud->post_image;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $file = $request->file('post_image');
+            $extintion = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extintion;
+            $image_path = $file->move('upload/ajaxposts/',$filename);
+            $ajaxcrud->post_image = $image_path;
+        } 
+        }
+        $ajaxcrud->update();
+            return response()->json([
+                'status' => 200,
+                'success' => 'Ajax Data Update successfuly !'
+            ]);
+      /*  }*/
     }
     /**
      * Remove the specified resource from storage.
@@ -118,12 +161,12 @@ class AjaxcrudController extends Controller
     {
     	// Ajaxcrud::destroy(array('id',$id));
      try {
-     	$ajaxcrud = Ajaxcrud::find($id);
-     	Ajaxcrud::destroy($ajaxcrud);
-     	   $destination = $ajaxcrud->post_image;
+     	  $ajaxcrud = Ajaxcrud::find($id);
+     	  $destination = 'upload/ajaxposts/'.$ajaxcrud->post_image;
             if (File::exists($destination)) {
-                file::delete($destination);
+                File::delete($destination);
             }
+            $ajaxcrud->delete();
      	return response()->json([
      	'status' => 200,
      	'massage' => 'Data Deleted'

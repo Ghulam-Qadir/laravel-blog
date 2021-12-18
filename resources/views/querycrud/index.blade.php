@@ -42,7 +42,7 @@
 					<tr>
 						<td>{{ $post->id }}</td>
 						<td><a href="querysingle/{{ $post->slug }}">{{ $post->title }}</a></td>
-						<td><img src="{{ asset('upload/post/'.$post->post_image)}}" alt="" width="100"></td>
+						<td><img src="{{ asset('upload/query/'.$post->post_image)}}" alt="" width="100"></td>
 						<td><a class="btn btn-primary" href="queryedit/{{ $post->id }}">Edit</a></td>
 						<td><a class="btn btn-danger" href="querydelete/{{ $post->id }}">Delete</a></td>
 					</tr>

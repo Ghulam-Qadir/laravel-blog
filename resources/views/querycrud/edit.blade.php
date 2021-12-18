@@ -15,7 +15,7 @@
 	</div>
 	<div class="form-group">
 		<input type="file" name="post_image" class="form-control mb-3" >
-		<img src="{{ asset('upload/post/'.$PostArr->post_image)}}" alt="" width="100">
+		<img src="{{ asset('upload/query/'.$PostArr->post_image)}}" alt="" width="100">
 	</div>
 	<div class="form-group">	
 		<input class="btn btn-primary" type="submit" name="submit" value="Update">

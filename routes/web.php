@@ -59,6 +59,7 @@ Route::get('ajaxposts', [AjaxcrudController::class,'index'])->name('ajaxposts');
 Route::get('ajaxpostsget', [AjaxcrudController::class,'loaddata'])->name('ajaxpostsget');
 Route::post('ajaxstore', [AjaxcrudController::class,'store'])->name('ajaxstore');
 Route::post('ajaxdel/{id}', [AjaxcrudController::class,'destroy']);
+Route::post('ajaxupdate', [AjaxcrudController::class,'update'])->name('ajaxupdate');
 });
 
 Auth::routes();
