@@ -95,12 +95,13 @@ class QuerycrudController extends Controller
      */
     public function update(Request $request, querycrud $querycrud,$id)
     {
-       $datadb = DB::table('querycruds')->where('id',$id);
+   $query = DB::table('querycruds')->where('id', '=', $id);
+   $image = $query->first();
      $title = $request->input('title');
       $slug = Str::slug($title);
         $body = $request->input('body');
         if ($request->hasfile('post_image')) {
-            $destination = 'upload/query/'.$datadb->post_image;
+            $destination = 'upload/query/'.$image->post_image;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
@@ -129,15 +130,13 @@ class QuerycrudController extends Controller
      */
     public function destroy(querycrud $querycrud,$id)
     {
-       $postdelete = DB::table('querycruds')->where('id',$id);
-        $destination = 'upload/query/'.$postdelete->post_image;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-            $postdelete->delete();
+
+          $query = DB::table('querycruds')->where('id', '=', $id);
+        $image = $query->first();
+        File::delete(public_path() . '/upload/query/' . $image->post_image);
+        $query->delete();
          Session::flash('danger','Data Deleted !');
         return redirect('queryposts');
-        //
     }
 
         public function all(querycrud $querycrud)
