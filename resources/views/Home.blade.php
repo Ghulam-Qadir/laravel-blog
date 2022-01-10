@@ -10,7 +10,8 @@
 				</div>
 				<div class="card-body">
 					<img src="{{ asset('upload/post/'.$post->post_image)}}" alt="" class="w-100 mb-3">
-					<h5><a href="single/{{ $post->slug }}">{{ $post->title }}</a></h5>
+					{{-- <h5><a href="single/{{ $post->slug }}">{{ $post->title }}</a></h5> --}}
+					<h5><a href="{{ route('single',$post->slug) }}">{{ $post->title }}</a></h5>
 					<p>{{ $post->body }}</p>
 				</div>
 			</div>

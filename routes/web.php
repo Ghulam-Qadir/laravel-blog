@@ -33,7 +33,7 @@ Route::get('model-crud', [PostController::class,'all']);
 Route::get('query-builder-crud', [QuerycrudController::class,'all']);
 
 
-Route::get('single/{slug}', [PostController::class,'index']);
+Route::get('single/{slug}', [PostController::class,'index'])->name('single');
 Route::get('querysingle/{slug}', [QuerycrudController::class,'index']);
 
 
