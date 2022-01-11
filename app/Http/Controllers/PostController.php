@@ -92,7 +92,7 @@ class PostController extends Controller
     
     	//$posts = DB::table('posts')->get();
         $posts = Post::get();
-        return view('home',compact('posts'));
+        return view('home', compact('posts'));
         
     }
 
