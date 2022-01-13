@@ -7,7 +7,8 @@
 	<meta name="_token" content="{{csrf_token()}}" />
 	<title>@yield('title')</title>
 <!-- Bootstrap CSS -->
-	  <link rel="stylesheet" href={{ asset('css/app.css') }}>
+<link rel="stylesheet" href={{ asset('css/app.css') }}>
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 </head>
 <body>
 <header>

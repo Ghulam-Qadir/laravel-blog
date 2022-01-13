@@ -1,5 +1,5 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -27,12 +27,21 @@
       </li>
            <li class="nav-item">
         <a href="{{ url('ajaxposts') }}" class="nav-link">Dashboard With Ajax</a>
+      </li>   
+        <li class="nav-item">
+        <a href="{{ route('gallery') }}" class="nav-link">Dashboard With gallery</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ route('view-gallery') }}" class="nav-link">View Gallery</a>
       </li>
       <li class="nav-item">
         <a href="{{ url('model-crud') }}" class="nav-link">model-crud</a>
       </li>  
       <li class="nav-item">
         <a href="{{ url('query-builder-crud') }}" class="nav-link">query-builder-crud</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('ajax-crud') }}" class="nav-link">Ajax-Crud</a>
       </li>
  
                     </ul>

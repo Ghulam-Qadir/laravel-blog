@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\file;
 use Illuminate\Support\Str;
+
 class AjaxcrudController extends Controller
 {
     /**
@@ -15,10 +16,15 @@ class AjaxcrudController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ajaxcrud $ajaxcrud,$slug)
     {
-    	$ajaxcrud = new Ajaxcrud;
-        return view('Ajax.index');
+        return view('Ajax.single')->with('ajaxdata', Ajaxcrud::where('slug', $slug)->first());
+    }
+
+       public function all(ajaxcrud $ajaxcrud)
+    {
+        $ajaxcrud = Ajaxcrud::all();
+        return view('ajaxdata', compact('ajaxcrud'));
     }
     /**
      * Show the form for creating a new resource.

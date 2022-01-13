@@ -18,8 +18,8 @@ class QuerycrudController extends Controller
      */
     public function index(Request $request,$slug)
     {
-        $postdata  = DB::table('querycruds')->get()->where('slug',$slug)->first();
-        return view('querycrud.single',compact('postdata'));
+        $querydata  = DB::table('querycruds')->get()->where('slug',$slug)->first();
+        return view('querycrud.single', compact('querydata'));
     }
 
     /**
@@ -48,8 +48,8 @@ class QuerycrudController extends Controller
             $file = $request->file('post_image');
             $extintion = $file->getClientOriginalExtension();
             $filename = time().'.'.$extintion;
-            $file->move('upload/query/',$filename);
-            $post_image = $filename;
+          $fullpath = $file->move('upload/query/',$filename);
+            $post_image = $fullpath;
         }
         $post = DB::table('querycruds')->insert([
             'title' => $title,

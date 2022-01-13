@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AjaxcrudController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\QuerycrudController;
 use App\Http\Controllers\UserAuth;
@@ -31,10 +32,14 @@ Route::get('contact', function(){
 
 Route::get('model-crud', [PostController::class,'all']);
 Route::get('query-builder-crud', [QuerycrudController::class,'all']);
+Route::get('ajax-crud', [AjaxcrudController::class,'all']);
+
+
 
 
 Route::get('single/{slug}', [PostController::class,'index'])->name('single');
-Route::get('querysingle/{slug}', [QuerycrudController::class,'index']);
+Route::get('querysingle/{slug}', [QuerycrudController::class,'index'])->name('querysingle');
+Route::get('ajaxcrudsingle/{slug}', [AjaxcrudController::class,'index'])->name('ajaxsingle');
 
 
 
@@ -55,11 +60,17 @@ Route::get('querydelete/{id}', [QuerycrudController::class,'destroy']);
 Route::put('queryupdate/{id}', [QuerycrudController::class,'update'])->name('queryupdate.update');
 
 Route::get('ajaxcreate', [AjaxcrudController::class,'create'])->name('ajaxcreate');
-Route::get('ajaxposts', [AjaxcrudController::class,'index'])->name('ajaxposts');
+Route::get('ajaxposts', [AjaxcrudController::class,'show'])->name('ajaxposts');
 Route::get('ajaxpostsget', [AjaxcrudController::class,'loaddata'])->name('ajaxpostsget');
 Route::post('ajaxstore', [AjaxcrudController::class,'store'])->name('ajaxstore');
 Route::post('ajaxdel/{id}', [AjaxcrudController::class,'destroy']);
 Route::post('ajaxupdate', [AjaxcrudController::class,'update'])->name('ajaxupdate');
+
+
+Route::get('gallery', [GalleryController::class, 'index'])->name('gallery');
+Route::get('view-gallery', [GalleryController::class, 'show'])->name('view-gallery');
+Route::post('create-gallery', [GalleryController::class, 'create'])->name('create-gallery');
+
 });
 
 Auth::routes();
